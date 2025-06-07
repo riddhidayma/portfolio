@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Instagram, Facebook, Send } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -10,10 +11,21 @@ const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! I\'ll get back to you soon.');
-    setFormData({ name: '', email: '', message: '' });
+
+    // Replace these with your actual EmailJS service/template/public keys
+    const SERVICE_ID = 'service_344tw7x';
+    const TEMPLATE_ID = 'template_rpj82ic';
+    const PUBLIC_KEY = '4IaZoOPCDaVN0cP0Q';
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, formData, PUBLIC_KEY)
+      .then(() => {
+        alert('Thank you for your message! I\'ll get back to you soon.');
+        setFormData({ name: '', email: '', message: '' });
+      })
+      .catch((error: unknown) => {
+        console.error('Email sending error:', error);
+        alert('Oops! Something went wrong. Please try again.');
+      });
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -67,8 +79,9 @@ const Contact: React.FC = () => {
                   </div>
                   <div>
                     <p className="text-gray-300 text-sm">Location</p>
-                    <p className="text-white font-semibold text-lg">📍Green tower B602 
-Gilbert hill road near azad nagar metroandheri west</p>
+                    <p className="text-white font-semibold text-lg">
+                      📍Green tower B602 Gilbert hill road near azad nagar metro andheri west
+                    </p>
                   </div>
                 </div>
               </div>
@@ -80,12 +93,14 @@ Gilbert hill road near azad nagar metroandheri west</p>
                 <a 
                   href="#" 
                   className="w-12 h-12 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300"
+                  target="_blank" rel="noopener noreferrer"
                 >
                   <Instagram className="text-white" size={20} />
                 </a>
                 <a 
                   href="#" 
                   className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform duration-300"
+                  target="_blank" rel="noopener noreferrer"
                 >
                   <Facebook className="text-white" size={20} />
                 </a>
