@@ -30,7 +30,7 @@ const Navigation: React.FC = () => {
     { name: 'Contact', action: () => scrollToSection('contact') },
     {
       name: 'Resume',
-      action: () => window.open('/janhavi_resume.pdf', '_blank'),
+      action: () => window.open('/Janhavi_resume.pdf', '_blank'),
     },
   ];
 
